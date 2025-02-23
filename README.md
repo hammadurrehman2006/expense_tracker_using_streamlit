@@ -1,8 +1,8 @@
 # 🌱 Personal Expense Tracker: A Growth Mindset Adventure  
 *Built with Streamlit for the Growth Mindset Challenge*  
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://your-app-url-here.streamlit.app)  
-*Live Demo: [Click here to try it!](https://your-app-url-here.streamlit.app)*  
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://extrack.streamlit.app)  
+*Live Demo: [Click here to try it!](https://extrack.streamlit.app)*  
 *Published: February 22, 2025*  
 
 ---
@@ -42,7 +42,7 @@ Here’s the behind-the-scenes magic:
 ---
 
 ## 🎯 Try It Out!  
-1. **Live App:** [Click here](https://your-app-url-here.streamlit.app) to play with it online!  
+1. **Live App:** [Click here](https://extrack.streamlit.app) to play with it online!  
 2. **Run It Locally:**  
    ```bash
    # Clone this repo
