@@ -3,8 +3,8 @@ import pandas as pd
 import plotly.express as px
 from datetime import datetime
 
-# Set up the Streamlit app
-st.title("Personal Expense Tracker")
+# Custom styling for the title
+st.markdown("<h1 style='text-align: center; color: #4CAF50;'>Personal Expense Tracker</h1>", unsafe_allow_html=True)
 
 # Initialize a session state to store expenses
 if 'expenses' not in st.session_state:
@@ -28,6 +28,22 @@ if submit_button:
     st.session_state.expenses = pd.concat([st.session_state.expenses, new_expense], ignore_index=True)
     st.success("Expense added!")
 
+# File upload for CSV
+st.subheader("Or Upload Expenses")
+uploaded_file = st.file_uploader("Upload a CSV (Date,Amount,Category)", type="csv")
+if uploaded_file:
+    uploaded_data = pd.read_csv(uploaded_file)
+    st.session_state.expenses = pd.concat([st.session_state.expenses, uploaded_data], ignore_index=True)
+    st.success("Expenses uploaded successfully!")
+
+# Budget tracker
+st.subheader("Budget Overview")
+budget = st.number_input("Set Monthly Budget ($)", min_value=0.0, value=100.0)
+total_spent = st.session_state.expenses["Amount"].sum()
+st.write(f"Total Spent: ${total_spent:.2f} / Budget: ${budget:.2f}")
+if total_spent > budget:
+    st.warning("You've exceeded your budget!")
+
 # Display the expense table
 st.subheader("Your Expenses")
 if not st.session_state.expenses.empty:
@@ -44,12 +60,11 @@ if not st.session_state.expenses.empty:
 
     # Line graph for spending over time
     st.subheader("Spending Over Time")
-    # Group by date to handle multiple entries per day
     time_data = st.session_state.expenses.groupby("Date").sum().reset_index()
     line_fig = px.line(time_data, x="Date", y="Amount", title="Daily Spending Trend")
     st.plotly_chart(line_fig)
 
-# Optional: Clear all expenses (for testing)
+# Optional: Clear all expenses
 if st.button("Reset Tracker"):
     st.session_state.expenses = pd.DataFrame(columns=["Date", "Amount", "Category"])
     st.success("Tracker reset!")
