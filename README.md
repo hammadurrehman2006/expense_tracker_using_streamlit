@@ -79,13 +79,12 @@ This project embodies the challenge’s core principles:
 
 ## 📸 Sneak Peek  
 Here’s what you’ll see:  
-![Pie Chart](image.png)  
+![Pie Chart](piechart.png)  
 *Pie chart of spending by category*  
 
-![Line Graph](image.png)  
+![Line Graph](linegraph.png)  
 *Spending trend over time*  
 
-*(Replace these placeholders with actual screenshots by uploading them to your repo!)*  
 
 ---
 
