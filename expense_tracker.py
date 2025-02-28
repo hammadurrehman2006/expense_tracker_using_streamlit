@@ -3,10 +3,9 @@ import pandas as pd
 import plotly.express as px
 from datetime import datetime
 
-# Custom styling for the title
+# Title using Html
 st.markdown("<h1 style='text-align: center; color: #4CAF50;'>Personal Expense Tracker</h1>", unsafe_allow_html=True)
 
-# Initialize a session state to store expenses
 if 'expenses' not in st.session_state:
     st.session_state.expenses = pd.DataFrame(columns=["Date", "Amount", "Category"])
 
@@ -14,11 +13,11 @@ if 'expenses' not in st.session_state:
 st.subheader("Add a New Expense")
 with st.form(key="expense_form"):
     date = st.date_input("Date", value=datetime.today())
-    amount = st.number_input("Amount ($)", min_value=0.01, step=0.01)
+    amount = st.number_input("Amount ($)", min_value=1.0, step=1.0)
     category = st.selectbox("Category", ["Food", "Transport", "Entertainment", "Bills", "Other"])
     submit_button = st.form_submit_button(label="Add Expense")
 
-# When the form is submitted, add the expense to the dataframe
+# When the form is submitted, add the expense to the list 
 if submit_button:
     new_expense = pd.DataFrame({
         "Date": [date],
@@ -51,20 +50,20 @@ if not st.session_state.expenses.empty:
 else:
     st.write("No expenses added yet.")
 
-# Visualizations
+#Graphs representation
 if not st.session_state.expenses.empty:
-    # Pie chart for category breakdown
+    # Pie chart
     st.subheader("Spending by Category")
     pie_fig = px.pie(st.session_state.expenses, values="Amount", names="Category", title="Expense Distribution")
     st.plotly_chart(pie_fig)
 
-    # Line graph for spending over time
+    # Line graph
     st.subheader("Spending Over Time")
     time_data = st.session_state.expenses.groupby("Date").sum().reset_index()
     line_fig = px.line(time_data, x="Date", y="Amount", title="Daily Spending Trend")
     st.plotly_chart(line_fig)
 
-# Optional: Clear all expenses
+# Clear all expenses in table
 if st.button("Reset Tracker"):
     st.session_state.expenses = pd.DataFrame(columns=["Date", "Amount", "Category"])
     st.success("Tracker reset!")
